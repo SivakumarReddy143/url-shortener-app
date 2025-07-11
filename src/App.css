@@ -1,0 +1,125 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f9fb;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  padding: 32px 24px 24px 24px;
+}
+
+nav ul {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1976d2;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #0d47a1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.url-input-card {
+  background: #f1f5fa;
+  border-radius: 8px;
+  padding: 18px 16px 12px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.url-input-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.url-input-card input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #cfd8dc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.url-input-card button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #e57373;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.url-input-card button:hover {
+  background: #c62828;
+}
+
+.add-btn, .submit-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+}
+
+.add-btn:hover, .submit-btn:hover {
+  background: #0d47a1;
+}
+
+.results-section {
+  margin-top: 32px;
+}
+
+.short-url-card {
+  background: #e3f2fd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.short-url-card strong {
+  color: #1976d2;
+}
+
+@media (max-width: 600px) {
+  .App {
+    padding: 12px 4px;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
