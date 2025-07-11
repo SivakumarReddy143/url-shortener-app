@@ -60,7 +60,7 @@ const StatisticsPage: React.FC = () => {
                   <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Original URL</th>
                   <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Shortened URL</th>
                   <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Shortcode</th>
-                  <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Expiry Time</th>
+                  <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Expiry Date</th>
                   <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #ddd' }}>Status</th>
                 </tr>
               </thead>
@@ -81,7 +81,7 @@ const StatisticsPage: React.FC = () => {
                       {url.shortcode}
                     </td>
                     <td style={{ padding: '12px' }}>
-                      {new Date(url.expiryDate).toLocaleString()}
+                      {new Date(url.expiryDate).toLocaleDateString()}
                     </td>
                     <td style={{ padding: '12px' }}>
                       <span style={{

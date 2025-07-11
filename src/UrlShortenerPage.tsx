@@ -3,7 +3,7 @@ import * as yup from 'yup';
 
 interface UrlInput {
   originalUrl: string;
-  validityMinutes: string;
+  validityDays: string;
   shortcode: string;
 }
 
@@ -19,13 +19,13 @@ const MAX_URLS = 5;
 // Validation schema
 const urlSchema = yup.object().shape({
   originalUrl: yup.string().url('Please enter a valid URL').required('URL is required'),
-  validityMinutes: yup.number().min(1, 'Must be at least 1 minute').required('Validity period is required'),
+  validityDays: yup.number().min(1, 'Must be at least 1 day').required('Validity period is required'),
   shortcode: yup.string().matches(/^[a-zA-Z0-9]*$/, 'Shortcode must be alphanumeric').optional()
 });
 
 const UrlShortenerPage: React.FC = () => {
   const [inputs, setInputs] = useState<UrlInput[]>([
-    { originalUrl: '', validityMinutes: '', shortcode: '' },
+    { originalUrl: '', validityDays: '', shortcode: '' },
   ]);
   const [results, setResults] = useState<ShortenedUrl[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
@@ -43,7 +43,7 @@ const UrlShortenerPage: React.FC = () => {
 
   const addField = () => {
     if (inputs.length < MAX_URLS) {
-      setInputs([...inputs, { originalUrl: '', validityMinutes: '', shortcode: '' }]);
+      setInputs([...inputs, { originalUrl: '', validityDays: '', shortcode: '' }]);
     }
   };
 
@@ -70,7 +70,7 @@ const UrlShortenerPage: React.FC = () => {
         await urlSchema.validate(input);
         const shortenedUrl = generateShortUrl(input.originalUrl, input.shortcode);
         const expiryDate = new Date();
-        expiryDate.setMinutes(expiryDate.getMinutes() + parseInt(input.validityMinutes));
+        expiryDate.setDate(expiryDate.getDate() + parseInt(input.validityDays));
         newResults.push({
           originalUrl: input.originalUrl,
           shortenedUrl,
@@ -103,8 +103,8 @@ const UrlShortenerPage: React.FC = () => {
             <label>Original URL:
               <input type="url" required value={input.originalUrl} onChange={e => handleChange(idx, 'originalUrl', e.target.value)} placeholder="https://example.com" />
             </label>
-            <label>Validity (minutes):
-              <input type="number" min="1" required value={input.validityMinutes} onChange={e => handleChange(idx, 'validityMinutes', e.target.value)} placeholder="e.g. 30" />
+            <label>Validity (days):
+              <input type="number" min="1" required value={input.validityDays} onChange={e => handleChange(idx, 'validityDays', e.target.value)} placeholder="e.g. 7" />
             </label>
             <label>Shortcode (optional):
               <input type="text" value={input.shortcode} onChange={e => handleChange(idx, 'shortcode', e.target.value)} placeholder="e.g. mycode123" />
@@ -134,7 +134,7 @@ const UrlShortenerPage: React.FC = () => {
             <div key={idx} className="short-url-card">
               <p><strong>Original URL:</strong> {result.originalUrl}</p>
               <p><strong>Shortened URL:</strong> <a href={result.shortenedUrl} target="_blank" rel="noopener noreferrer">{result.shortenedUrl}</a></p>
-              <p><strong>Expiry Time:</strong> {new Date(result.expiryDate).toLocaleString()}</p>
+              <p><strong>Expiry Date:</strong> {new Date(result.expiryDate).toLocaleDateString()}</p>
               <p><strong>Shortcode:</strong> {result.shortcode}</p>
             </div>
           ))}
